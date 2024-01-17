@@ -2,9 +2,8 @@ import React, {useEffect, useState} from "react";
 import MoreButton from "./MoreButton";
 import Sushi from './Sushi'
 
-function SushiContainer(props) {
+function SushiContainer({sushiRender, setSushiRender}) {
   const [sushiList, setSushiList] = useState([])
-  const [sushiRender, setSushiRender] = useState([])
   const [currentSushi, setCurrentSushi] = useState(4)
 
 
