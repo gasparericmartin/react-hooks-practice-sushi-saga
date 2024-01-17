@@ -17,6 +17,12 @@ function SushiContainer(props) {
     })
   }, [])
 
+  function handleMore() {
+    console.log('clicked!')
+    setSushiRender(sushiList.slice(currentSushi, currentSushi + 4))
+    setCurrentSushi((currentSushi) => currentSushi += 4)
+  }
+
 
   
   return (
@@ -26,11 +32,7 @@ function SushiContainer(props) {
                 key={sushi.id} 
                 sushi={sushi}/>
       })}
-      <MoreButton 
-        currentSushi={currentSushi}
-        setCurrentSushi={setCurrentSushi}
-        sushiList={sushiList}
-        setSushiRender={setSushiRender}/>
+      <MoreButton handleMore={handleMore}/>
     </div>
   );
 }
