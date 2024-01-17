@@ -5,7 +5,7 @@ import Sushi from './Sushi'
 function SushiContainer(props) {
   const [sushiList, setSushiList] = useState([])
   const [sushiRender, setSushiRender] = useState([])
-  const [currentSushi, setCurrentSushi] = useState(5)
+  const [currentSushi, setCurrentSushi] = useState(4)
 
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function SushiContainer(props) {
     .then((response) => response.json())
     .then((data) => {
       setSushiList(data)
-      setSushiRender(data.slice(0, 5))
+      setSushiRender(data.slice(0, 4))
     })
   }, [])
 
@@ -26,7 +26,11 @@ function SushiContainer(props) {
                 key={sushi.id} 
                 sushi={sushi}/>
       })}
-      <MoreButton />
+      <MoreButton 
+        currentSushi={currentSushi}
+        setCurrentSushi={setCurrentSushi}
+        sushiList={sushiList}
+        setSushiRender={setSushiRender}/>
     </div>
   );
 }
