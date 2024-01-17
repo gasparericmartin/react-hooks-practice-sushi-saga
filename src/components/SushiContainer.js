@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import MoreButton from "./MoreButton";
 import Sushi from './Sushi'
 
-function SushiContainer({sushiRender, setSushiRender}) {
+function SushiContainer({sushiRender, setSushiRender, empties, setEmpties}) {
   const [sushiList, setSushiList] = useState([])
   const [currentSushi, setCurrentSushi] = useState(4)
 
@@ -22,6 +22,10 @@ function SushiContainer({sushiRender, setSushiRender}) {
     setCurrentSushi((currentSushi) => currentSushi += 4)
   }
 
+  function getSushi() {
+
+  }
+
 
   
   return (
@@ -29,7 +33,9 @@ function SushiContainer({sushiRender, setSushiRender}) {
       {sushiRender.map((sushi) => {
         return <Sushi 
                 key={sushi.id} 
-                sushi={sushi}/>
+                sushi={sushi}
+                empties={empties}
+                setEmpties={setEmpties}/>
       })}
       <MoreButton handleMore={handleMore}/>
     </div>

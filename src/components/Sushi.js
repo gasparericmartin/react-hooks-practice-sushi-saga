@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 
-function Sushi({sushi}) {
+function Sushi({sushi, empties, setEmpties}) {
   const [eaten, setEaten] = useState(false)
   function handleClick() {
     setEaten(!eaten)
+    setEmpties([...empties, sushi])
   }
   
   return (
