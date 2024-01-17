@@ -7,6 +7,7 @@ const API = "http://localhost:3001/sushis";
 function App() {
   const [sushiRender, setSushiRender] = useState([])
   const [empties, setEmpties] = useState([])
+  const [money, setMoney] = useState(40)
   
   return (
     <div className="app">
@@ -15,7 +16,9 @@ function App() {
         setSushiRender={setSushiRender} 
         empties={empties}
         setEmpties={setEmpties}/>
-      <Table plates={empties}/>
+      <Table 
+        plates={empties}
+        money={money}/>
     </div>
   );
 }
