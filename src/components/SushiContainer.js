@@ -2,7 +2,13 @@ import React, {useEffect, useState} from "react";
 import MoreButton from "./MoreButton";
 import Sushi from './Sushi'
 
-function SushiContainer({sushiRender, setSushiRender, empties, setEmpties}) {
+function SushiContainer({
+          sushiRender, 
+          setSushiRender, 
+          empties, 
+          setEmpties, 
+          money,
+          setMoney}) {
   const [sushiList, setSushiList] = useState([])
   const [currentSushi, setCurrentSushi] = useState(4)
 
@@ -17,16 +23,9 @@ function SushiContainer({sushiRender, setSushiRender, empties, setEmpties}) {
   }, [])
 
   function handleMore() {
-    console.log('clicked!')
     setSushiRender(sushiList.slice(currentSushi, currentSushi + 4))
     setCurrentSushi((currentSushi) => currentSushi += 4)
   }
-
-  function getSushi() {
-
-  }
-
-
   
   return (
     <div className="belt">
@@ -35,7 +34,9 @@ function SushiContainer({sushiRender, setSushiRender, empties, setEmpties}) {
                 key={sushi.id} 
                 sushi={sushi}
                 empties={empties}
-                setEmpties={setEmpties}/>
+                setEmpties={setEmpties}
+                money={money}
+                setMoney={setMoney}/>
       })}
       <MoreButton handleMore={handleMore}/>
     </div>

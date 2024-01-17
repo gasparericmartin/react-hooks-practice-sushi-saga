@@ -1,10 +1,18 @@
 import React, {useState} from "react";
 
-function Sushi({sushi, empties, setEmpties}) {
+function Sushi({sushi, empties, setEmpties, money, setMoney}) {
   const [eaten, setEaten] = useState(false)
   function handleClick() {
-    setEaten(!eaten)
-    setEmpties([...empties, sushi])
+    if(sushi.price <= money) {
+      setEaten(!eaten)
+      setEmpties([...empties, sushi])
+      setMoney((money) => money -= sushi.price)
+    }
+    else {
+      console.log("can't do that")
+    }
+
+    
   }
   
   return (

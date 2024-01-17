@@ -15,7 +15,9 @@ function App() {
         sushiRender={sushiRender}
         setSushiRender={setSushiRender} 
         empties={empties}
-        setEmpties={setEmpties}/>
+        setEmpties={setEmpties}
+        money={money}
+        setMoney={setMoney}/>
       <Table 
         plates={empties}
         money={money}/>
