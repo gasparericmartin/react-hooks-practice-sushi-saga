@@ -9,8 +9,9 @@ function SushiContainer({
           setEmpties, 
           money,
           setMoney}) {
+  const listLength = 4
   const [sushiList, setSushiList] = useState([])
-  const [currentSushi, setCurrentSushi] = useState(4)
+  const [currentSushi, setCurrentSushi] = useState(listLength)
 
 
   useEffect(() => {
@@ -18,13 +19,21 @@ function SushiContainer({
     .then((response) => response.json())
     .then((data) => {
       setSushiList(data)
-      setSushiRender(data.slice(0, 4))
+      setSushiRender(data.slice(0, listLength))
     })
   }, [])
 
   function handleMore() {
-    setSushiRender(sushiList.slice(currentSushi, currentSushi + 4))
-    setCurrentSushi((currentSushi) => currentSushi += 4)
+    console.log(sushiRender.length)
+    if(sushiList[sushiList.length - 1] === sushiRender[sushiRender.length - 1]) {
+      console.log('you have reached the end')
+      setSushiRender(sushiList.slice(0, listLength))
+      setCurrentSushi(listLength)
+    }
+    else {
+      setSushiRender(sushiList.slice(currentSushi, currentSushi + 4))
+      setCurrentSushi((currentSushi) => currentSushi += 4)
+    }
   }
   
   return (
@@ -36,7 +45,9 @@ function SushiContainer({
                 empties={empties}
                 setEmpties={setEmpties}
                 money={money}
-                setMoney={setMoney}/>
+                setMoney={setMoney}
+                sushiRender={sushiRender}
+                setSushiRender={setSushiRender}/>
       })}
       <MoreButton handleMore={handleMore}/>
     </div>

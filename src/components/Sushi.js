@@ -1,12 +1,41 @@
 import React, {useState} from "react";
 
-function Sushi({sushi, empties, setEmpties, money, setMoney}) {
-  const [eaten, setEaten] = useState(false)
+function Sushi({
+          sushi, 
+          empties, 
+          setEmpties, 
+          money, 
+          setMoney, 
+          sushiRender, 
+          setSushiRender}) {
+  const [clicked, setClicked] = useState(false)
+
+  function renderSushi(data) {
+    return sushiRender.map((sushi) => {
+      if(sushi.id !== data.id) {
+        return sushi
+      }
+      else {
+        return data
+      }
+    })
+  }
+  
   function handleClick() {
     if(sushi.price <= money) {
-      setEaten(!eaten)
+      setClicked(!clicked)
       setEmpties([...empties, sushi])
       setMoney((money) => money -= sushi.price)
+
+      fetch(`http://localhost:3001/sushis/${sushi.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({...sushi, eaten: true})
+      })
+      .then((response) => response.json())
+      .then((data) => setSushiRender(renderSushi(data)))
     }
     else {
       console.log("can't do that")
@@ -18,7 +47,7 @@ function Sushi({sushi, empties, setEmpties, money, setMoney}) {
   return (
     <div className="sushi">
       <div className="plate" onClick={handleClick}>
-        {eaten ? null : (
+        {sushi.eaten ? null : (
           <img
             src={sushi.img_url}
             alt={sushi.name}
